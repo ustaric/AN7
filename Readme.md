@@ -1,8 +1,21 @@
 # SmartArchiver / AN7 (C++ Win32)
 
+> **[⚠️ Beta / Test Version]**  
 > **Windows 탐색기 우클릭 메뉴 연동 및 스마트 압축 해제 / 새 폴더 관리 유틸리티**  
 > 별도의 상주 프로세스나 외부 런타임 없이, 순수 C++ Win32 API로 작성된 단일 실행 파일(`.exe`)과 윈도우 레지스트리를 통해 연동되도록 구현되었습니다.
 
+---
+
+## ⚠️ 테스트 버전 및 면책 공지 (Notice & Disclaimer)
+
+> **본 프로그램은 현재 기능 검증 및 테스트 단계인 [베타(Beta) 버전]입니다.**  
+> 본 프로젝트는 **AI(인공지능) 코딩 어시스턴트의 지원을 받아 개발**되었으며, 윈도우 레지스트리 등록 및 파일 시스템 조작을 수반하므로 아래 면책 조항을 반드시 숙지한 후 사용하시기 바랍니다.
+
+- **비파괴 안전 설계**: 본 유틸리티는 소스 코드 내에 파일/폴더 삭제 API(`DeleteFile`, `RemoveDirectory` 등)가 일체 포함되어 있지 않으며, 파일 덮어쓰기 등의 실제 압축 해제 작업은 7-Zip / NanaZip 공식 GUI 엔진의 안전 대화상자에 전적으로 위임하여 동작합니다.
+
+- **AI 지원 개발 (AI-Assisted)**: 본 프로젝트는 최신 C++17 규격 및 Win32 API 표준에 맞추어 AI 코딩 어시스턴트의 지원을 받아 개발 및 검증되었습니다.
+
+- **면책 조항 (Disclaimer)**: 본 프로그램은 개인 및 기업 모두에게 무료로 제공되는 오픈소스/베타 소프트웨어(AS-IS)입니다. 레지스트리 등록 및 외부 압축 엔진과의 연동 과정에서 발생할 수 있는 시스템 환경 차이나 사용자의 취급 부주의로 인한 문제에 대해 개발자는 법적 책임을 지지 않으므로, 중요한 환경에서는 테스트 후 사용하시기 바랍니다.
 ---
 
 ## 1. 아키텍처 및 레지스트리 어댑터 구조
@@ -107,31 +120,33 @@ SmartArchiver는 백그라운드 서비스나 쉘 익스텐션 DLL(In-Process CO
 
 영문으로 인터페이스를 구성하고자 할 경우, 실행 파일과 동일한 경로에 `lang.json` 파일을 UTF-8 인코딩으로 저장합니다:
 
-    {
-      "app_title": "Smart Archiver - Archiver & Folder Settings",
-      "menu_extract": "Smart Extract",
-      "menu_new_folder": "New Folder",
-      "folder_default_name": "New Folder",
-      "folder_date_format": "New Folder (%04d-%02d-%02d)",
-      "input_title": "New Folder",
-      "input_prompt": "Enter folder name:",
-      "input_hint": "Enter: Create   |   Esc: Cancel",
-      "section_archiver": "[ Select Extraction Engine (7-Zip Family) ]",
-      "section_folder": "[ New Folder ] Context Menu Settings",
-      "status_active": " [Registered]",
-      "chk_folder": "Register 'New Folder' to background context menu",
-      "lbl_mode": "Mode:",
-      "lbl_name": "Default Name:",
-      "mode_input": "Show name change popup (Center / System Theme)",
-      "mode_direct": "Create immediately without popup",
-      "name_normal": "Default (\"New Folder\")",
-      "name_date": "With Date (\"New Folder (YYYY-MM-DD)\")",
-      "btn_apply": "Apply",
-      "btn_unregister": "Unregister All",
-      "btn_close": "Close",
-      "msg_success": "Context menu registered successfully!",
-      "msg_unregistered": "All context menus have been unregistered."
-    }
+```json
+{
+  "app_title": "Smart Archiver - Archiver & Folder Settings",
+  "menu_extract": "Smart Extract",
+  "menu_new_folder": "New Folder",
+  "folder_default_name": "New Folder",
+  "folder_date_format": "New Folder (%04d-%02d-%02d)",
+  "input_title": "New Folder",
+  "input_prompt": "Enter folder name:",
+  "input_hint": "Enter: Create   |   Esc: Cancel",
+  "section_archiver": "[ Select Extraction Engine (7-Zip Family) ]",
+  "section_folder": "[ New Folder ] Context Menu Settings",
+  "status_active": " [Registered]",
+  "chk_folder": "Register 'New Folder' to background context menu",
+  "lbl_mode": "Mode:",
+  "lbl_name": "Default Name:",
+  "mode_input": "Show name change popup (Center / System Theme)",
+  "mode_direct": "Create immediately without popup",
+  "name_normal": "Default (\"New Folder\")",
+  "name_date": "With Date (\"New Folder (YYYY-MM-DD)\")",
+  "btn_apply": "Apply",
+  "btn_unregister": "Unregister All",
+  "btn_close": "Close",
+  "msg_success": "Context menu registered successfully!",
+  "msg_unregistered": "All context menus have been unregistered."
+}
+```
 
 ---
 
@@ -161,3 +176,10 @@ SmartArchiver는 백그라운드 서비스나 쉘 익스텐션 DLL(In-Process CO
 
 4. **등록 해제**:
    - `AN7.exe` 실행 후 **[전체 해제]**를 누르면 등록된 레지스트리 항목이 제거됩니다.
+
+---
+
+## 6. 라이선스 및 오픈소스 고지 (License)
+
+- 본 프로그램은 개인 및 기업 사용자 모두에게 무료로 제공됩니다.
+- 본 프로그램이 연동하는 외부 압축 엔진(7-Zip, NanaZip 등)의 저작권 및 라이선스는 각 해당 원작자에게 있습니다.
