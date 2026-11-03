@@ -1,0 +1,39 @@
+#include <windows.h>
+
+// 1. 아이콘 리소스 등록 (101: nana.ico, 102: 7z.ico)
+131 ICON "nana.ico"
+130 ICON "7z.ico"
+
+// 2. AN7 버전 및 저작권 정보 (0.0.0.1)
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,0,0,1
+ PRODUCTVERSION 0,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041204b0"
+        BEGIN
+            VALUE "CompanyName", "ustaric"
+            VALUE "FileDescription", "AN7 - 7-Zip & NanaZip Adapter"
+            VALUE "FileVersion", "0.0.0.1"
+            VALUE "InternalName", "AN7.exe"
+            VALUE "LegalCopyright", "Copyright (C) 2026 ustaric. All rights reserved."
+            VALUE "OriginalFilename", "AN7.exe"
+            VALUE "ProductName", "AN7"
+            VALUE "ProductVersion", "0.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x412, 1200
+    END
+END

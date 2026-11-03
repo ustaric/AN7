@@ -1,0 +1,25 @@
+# 1. 특정 폴더 전체를 제외할 때 (끝에 / 를 붙입니다)
+node_modules/
+dist/
+build/
+temp/
+.vscode/
+SmartArc.6b8ee353/
+.git/
+AN7/
+X64/
+.vs/
+
+# 2. 특정 파일을 제외할 때
+.env
+secret_key.json
+
+# 3. 특정 확장자 전체를 제외할 때
+*.log
+*.zip
+*.tar.gz
+
+# 4. 특정 경로 안의 폴더만 제외할 때
+/SmartArc.6b8ee353
+/AN7
+/X64
